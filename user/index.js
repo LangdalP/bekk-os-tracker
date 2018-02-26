@@ -1,26 +1,37 @@
-const request = require('request');
+var GithubGraphQLApi = require('node-github-graphql')
 
-const client_id = process.env.GITHUB_CLIENT_ID;
-const client_secret = process.env.GITHUB_CLIENT_SECRET;
+const github_token = process.env.GITHUB_API_TOKEN;
+const gh_api = new GithubGraphQLApi({
+  token: process.env.GITHUB_API_TOKEN
+})
 
-const request_settings = {
-  json: true,
-  headers: {
-    'User-Agent': 'request'
-  }
-};
+function pr_query(username) {
+  return `
+  {
+    user(login: "${username}") { 
+      pullRequests(last: 5) {
+        edges {
+          node {
+            resourcePath
+            title
+            createdAt
+          }
+        }
+      }
+    }
+  }`;
+}
 
 module.exports = function (context, req) {
   if (req.query.name) {
-    request(`https://api.github.com/users/${req.query.name}?client_id=${client_id}&client_secret=${client_secret}` , request_settings, (err, res, body) => {
-      if (err) {
-        context.log(err);
-        context.done(null, { status: 500 });
-      }
-      context.done(err, {
-        body: body
-      });
-    });
+   gh_api.query(pr_query(req.query.name), null, (res, err) => {
+     context.done(err, {
+       body: res,
+       headers: {
+         'Content-Type': 'application/json'
+       }
+     })
+   });
   }
   else {
     context.done(null, {
