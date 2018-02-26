@@ -1,0 +1,19 @@
+{
+  "name": "bekk-os-tracker",
+  "description": "Applikasjon som held styr på pull requests oppretta av bekkarar",
+  "version": "0.1.0",
+  "author": {
+    "name": "Peder Voldnes Langdal",
+    "email": "peder.langdal@gmail.com"
+  },
+  "contributors": [],
+  "dependencies": {
+    "request": "^2.83.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ]
+}
