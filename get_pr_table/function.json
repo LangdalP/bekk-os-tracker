@@ -16,7 +16,7 @@
       "connection": "TABLE_STORAGE_CONNECTION",
       "name": "tableBinding",
       "type": "table",
-      "direction": "out"
+      "direction": "in"
     }
   ],
   "disabled": false

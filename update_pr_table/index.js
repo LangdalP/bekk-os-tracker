@@ -1,4 +1,5 @@
 var GithubGraphQLApi = require('node-github-graphql')
+var utils = require('../utils.js')
 
 // To update or delete rows from Azure Table Storage:
 // https://anthonychu.ca/post/azure-functions-update-delete-table-storage/
@@ -42,26 +43,12 @@ function pr_query(username, afterCursor = null) {
   }`;
 }
 
-// Dates are stored as 'Date=2014-03-11T14:38:32Z' because Table Storage parses and mangles dates otherwise
-// More details: When you retrieve pull reqs. from Table Storage, the date format is like this: '21/03/2014 18:41:47'
-function prWithParsedDate(pr) {
-  const copy = Object.assign({}, pr);
-  const dateString = copy.createdAt.split('=')[1];
-  copy.createdAt = new Date(dateString);
-  return copy;
-}
-
-function sortPrsMostRecentFirst(a, b) {
-  if (a.createdAt === b.createdAt) return 0;
-  return a.createdAt >= b.createdAt ? -1 : 1;
-}
-
 function fetchStoredPrsForUser(context, username) {
   const tableRows = context.bindings.tableReadBinding;
   const pullReqsForUser = tableRows
-    .filter(pr => pr.PartitionKey === username)
-    .map(prWithParsedDate);
-  pullReqsForUser.sort(sortPrsMostRecentFirst);
+    .filter(pr => pr.PartitionKey.toLowerCase() === username.toLowerCase())
+    .map(utils.prWithParsedDate);
+  pullReqsForUser.sort(utils.sortPrsMostRecentFirst);
   return pullReqsForUser;
 }
 
