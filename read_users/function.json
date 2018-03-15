@@ -1,22 +1,24 @@
 {
   "bindings": [
     {
-      "authLevel": "function",
-      "type": "httpTrigger",
-      "direction": "in",
-      "name": "req"
-    },
-    {
-      "type": "http",
-      "direction": "out",
-      "name": "$return"
+      "schedule": "0 */5 * * * *",
+      "name": "timerTrigger",
+      "type": "timerTrigger",
+      "direction": "in"
     },
     {
       "tableName": "pullrequests",
       "connection": "TABLE_STORAGE_CONNECTION",
-      "name": "tableBinding",
+      "name": "tableReadBinding",
       "type": "table",
       "direction": "in"
+    },
+    {
+      "tableName": "pullrequests",
+      "connection": "TABLE_STORAGE_CONNECTION",
+      "name": "tableWriteBinding",
+      "type": "table",
+      "direction": "out"
     }
   ],
   "disabled": false
