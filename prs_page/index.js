@@ -2,7 +2,9 @@ var request = require('request');
 
 // API Response is array of PR-objects with the following fields:
 // createdAt, cursor, PartitionKey (=username), resourcePath, title, RowKey (=id of PR)
-const pr_api_url = 'https://bekk-os-tracker.azurewebsites.net/api/prs?code=qyp7F9e9D0WvA0WZT6nX60oBQiS8seKblhwPd2XJVOxQ4d1oSWB5ng==';
+const apiCode = process.env.PR_API_FUNCTION_KEY;
+const pr_api_url = `https://bekk-os-tracker.azurewebsites.net/api/prs?code=${apiCode}`;
+
 const colormap = {
   'langdalp': '#fffd9e',
   'mikaelbr': '#b3ff9e',
