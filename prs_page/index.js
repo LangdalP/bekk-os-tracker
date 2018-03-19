@@ -11,7 +11,8 @@ const colormap = {
   'christianalfoni': '#7aadff',
   'torgeir': '#e9b2ff',
   'dagstuan': '#ff9696',
-  'mahic': '#aafff9'
+  'mahic': '#aafff9',
+  'kgolid': '#55e2dd'
 };
 
 function lagPr(prData) {
