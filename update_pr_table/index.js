@@ -16,7 +16,8 @@ const usernames = [
   'christianalfoni',
   'torgeir',
   'dagstuan',
-  'mahic'
+  'mahic',
+  'kgolid'
 ]
 
 function pr_query(username, afterCursor = null) {
