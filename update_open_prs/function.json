@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "schedule": "0 */10 * * * *",
+      "name": "timerTrigger",
+      "type": "timerTrigger",
+      "direction": "in"
+    },
+    {
+      "tableName": "pullrequests",
+      "connection": "TABLE_STORAGE_CONNECTION",
+      "name": "tableReadBinding",
+      "type": "table",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

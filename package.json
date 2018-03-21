@@ -8,6 +8,7 @@
   },
   "contributors": [],
   "dependencies": {
+    "azure-storage": "^2.8.1",
     "node-github-graphql": "^0.2.6",
     "request": "^2.83.0"
   },
